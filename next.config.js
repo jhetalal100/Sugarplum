@@ -4,6 +4,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/',
+        destination: '/invite.html',
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

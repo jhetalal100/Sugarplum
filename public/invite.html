@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sugarplum🫶</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+
+            font-family:
+                "Trebuchet MS",
+                "Segoe UI",
+                sans-serif;
+
+            background:
+                radial-gradient(circle at top left,
+                    #fff0f7,
+                    transparent 35%),
+                radial-gradient(circle at bottom right,
+                    #ffd0e2,
+                    transparent 40%),
+                linear-gradient(135deg,
+                    #ffd9e8,
+                    #ffeef5,
+                    #ffd2e3);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: #64253f;
+        }
+
+
+        /* ------------------------------
+           MAIN CONTAINER
+        ------------------------------ */
+
+        .container {
+            width: min(92%, 650px);
+            position: relative;
+            z-index: 10;
+        }
+
+
+        /* ------------------------------
+           CARD
+        ------------------------------ */
+
+        .card {
+            position: relative;
+
+            padding: 20px 15px 15px;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.70);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border: 1px solid rgba(255, 255, 255, 0.85);
+
+            border-radius: 32px;
+
+            box-shadow:
+                0 25px 70px rgba(190, 70, 120, 0.18);
+
+            animation: cardAppear 1.2s ease;
+        }
+
+
+        /* ------------------------------
+           TOP DECORATION
+        ------------------------------ */
+
+        .top-decoration {
+            font-size: 20px;
+            letter-spacing: 10px;
+
+            margin-bottom: 4px;
+
+            animation: gentleFloat 3s ease-in-out infinite;
+        }
+
+
+        /* ------------------------------
+           TITLE
+        ------------------------------ */
+
+        h1 {
+            font-size: clamp(20px, 5vw, 32px);
+
+            line-height: 1.15;
+
+            color: #c62967;
+
+            margin-bottom: 4px;
+
+            text-shadow:
+                0 3px 15px rgba(198, 41, 103, 0.15);
+        }
+
+
+        .name {
+            display: block;
+
+            color: #e23878;
+
+            font-size: 1.05em;
+
+            margin-top: 4px;
+
+            animation: nameGlow 2.5s ease-in-out infinite;
+        }
+
+
+        /* ------------------------------
+           BIRTHDAY IMAGE
+        ------------------------------ */
+
+        .birthday-image {
+            width: 120px;
+            max-width: 72%;
+
+            display: block;
+
+            margin: 6px auto 8px;
+
+            border-radius: 24px;
+
+            object-fit: contain;
+
+            filter:
+                drop-shadow(0 12px 18px rgba(185, 56, 105, 0.15));
+
+            animation:
+                imageFloat 3.5s ease-in-out infinite;
+        }
+
+
+        /* ------------------------------
+           SUBTITLE
+        ------------------------------ */
+
+        .subtitle {
+            font-size: 13px;
+
+            color: #92536e;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* ------------------------------
+           QUESTION
+        ------------------------------ */
+
+        .question {
+            font-size: clamp(15px, 4vw, 18px);
+
+            line-height: 1.4;
+
+            font-weight: bold;
+
+            color: #70243f;
+
+            margin-bottom: 12px;
+        }
+
+
+        .question span {
+            display: inline-block;
+
+            animation:
+                heartbeat 2s ease-in-out infinite;
+        }
+
+
+        /* ------------------------------
+           BUTTON AREA
+        ------------------------------ */
+
+        .button-area {
+            position: relative;
+
+            width: 100%;
+
+            height: 50px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        /* ------------------------------
+           BUTTONS
+        ------------------------------ */
+
+        button {
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 8px 18px;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        /* YES */
+
+        #yesBtn {
+            color: white;
+
+            background:
+                linear-gradient(135deg,
+                    #ef3b82,
+                    #c9185b);
+
+            box-shadow:
+                0 10px 25px rgba(201, 24, 91, 0.28);
+
+            z-index: 5;
+        }
+
+
+        #yesBtn:hover {
+            transform: scale(1.09);
+
+            box-shadow:
+                0 14px 32px rgba(201, 24, 91, 0.38);
+        }
+
+
+        /* NO */
+
+        #noBtn {
+            position: relative;
+
+            color: #c44772;
+
+            background: rgba(255, 255, 255, 0.9);
+
+            border: 2px solid #f1b3ca;
+
+            box-shadow:
+                0 6px 18px rgba(190, 70, 120, 0.10);
+
+            z-index: 6;
+        }
+
+
+        /* ------------------------------
+           MESSAGE
+        ------------------------------ */
+
+        .message {
+            min-height: 28px;
+
+            margin-top: 8px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            color: #d12d6b;
+
+            opacity: 0;
+
+            transform: translateY(5px);
+
+            transition:
+                opacity 0.3s ease,
+                transform 0.3s ease;
+        }
+
+
+        .message.show {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* ------------------------------
+           FOOTER
+        ------------------------------ */
+
+        .tiny-text {
+            margin-top: 8px;
+
+            font-size: 11px;
+
+            color: #b87991;
+
+            opacity: 0.8;
+        }
+
+
+        /* ------------------------------
+           FLOATING DECORATIONS
+        ------------------------------ */
+
+        .decoration {
+            position: fixed;
+
+            pointer-events: none;
+
+            z-index: 1;
+
+            user-select: none;
+
+            animation:
+                floatUp linear forwards;
+        }
+
+
+        /* ------------------------------
+           ANIMATIONS
+        ------------------------------ */
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(35px) scale(0.94);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0) scale(1);
+            }
+        }
+
+
+        @keyframes imageFloat {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0) rotate(-1deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-9px) rotate(1deg);
+            }
+        }
+
+
+        @keyframes gentleFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+
+        @keyframes nameGlow {
+
+            0%,
+            100% {
+                text-shadow:
+                    0 0 0 rgba(226, 56, 120, 0);
+            }
+
+            50% {
+                text-shadow:
+                    0 0 18px rgba(226, 56, 120, 0.25);
+            }
+        }
+
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+
+        @keyframes floatUp {
+
+            0% {
+                transform:
+                    translateY(105vh) rotate(0deg);
+
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.75;
+            }
+
+            85% {
+                opacity: 0.75;
+            }
+
+            100% {
+                transform:
+                    translateY(-15vh) rotate(360deg);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* ------------------------------
+           MOBILE
+        ------------------------------ */
+
+        @media (max-width: 500px) {
+
+            body {
+                overflow: hidden;
+            }
+
+            .card {
+                padding:
+                    30px 18px 25px;
+
+                border-radius: 26px;
+            }
+
+            h1 {
+                font-size: 35px;
+            }
+
+            .birthday-image {
+                width: 190px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+            }
+
+            .question {
+                font-size: 21px;
+            }
+
+            .button-area {
+                gap: 12px;
+            }
+
+            button {
+                padding:
+                    13px 22px;
+
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- Floating decorations -->
+    <div id="decorations"></div>
+
+
+    <div class="container">
+
+        <div class="card">
+
+
+            <!-- Top decoration -->
+
+            <div class="top-decoration">
+                🎀 ✨ 🎀
+            </div>
+
+
+            <!-- Birthday title -->
+
+            <h1>
+
+                Happy Birthday
+
+                <span class="name">
+                    Vignaaa 💗
+                </span>
+
+            </h1>
+
+
+            <!-- Birthday image -->
+
+            <img src="/images/cake.webp" alt="Cute birthday celebration" class="birthday-image">
+
+
+            <!-- Subtitle -->
+
+            <p class="subtitle">
+                Today is all about you... 🎂✨
+            </p>
+
+
+            <!-- Question -->
+
+            <div class="question">
+
+                I have a surprise for you...
+
+                <span>🥺</span>
+
+                <br>
+
+                Will you see it? 💕
+
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="button-area">
+
+                <button id="yesBtn">
+                    Yes 💖
+                </button>
+
+                <button id="noBtn">
+                    No 🙈
+                </button>
+
+            </div>
+
+
+            <!-- Dynamic message -->
+
+            <div id="message" class="message">
+                Please see it 🥺
+            </div>
+
+
+            <div class="tiny-text">
+                There might be something waiting for you... 🎁
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+
+        /* =========================================
+           YOUR OTHER WEBSITE
+           ========================================= */
+
+        const surpriseWebsite = "/";
+
+
+        /* =========================================
+           ELEMENTS
+           ========================================= */
+
+        const yesBtn =
+            document.getElementById("yesBtn");
+
+        const noBtn =
+            document.getElementById("noBtn");
+
+        const message =
+            document.getElementById("message");
+
+
+        /* =========================================
+           NO BUTTON MESSAGES
+           ========================================= */
+
+        const messages = [
+
+            "Please see it 🥺",
+
+            "Don't you want to see it? 👀",
+
+            "Just click YES 💗",
+
+            "I promise you'll like it ✨",
+
+            "Come onnn 🥹",
+
+            "It's waiting for you 🎁",
+
+            "Nope... not letting you click that 😌",
+
+            "Try YES instead 😏",
+
+            "Why are you still trying? 😂",
+
+            "The surprise is worth it 💕",
+
+            "You really want to click NO? 😭",
+
+            "Nice try! 🙈",
+
+            "I'm faster than you 😌",
+
+            "Just trust me this once 💗",
+
+            "There is something special waiting ✨"
+
+        ];
+
+
+        let messageIndex = 0;
+
+        let noAttempts = 0;
+
+
+        /* =========================================
+           MOVE NO BUTTON
+           ========================================= */
+
+        function moveNoButton() {
+
+
+            noAttempts++;
+
+
+            /*
+             * Different small movements.
+             * This keeps the button playful rather
+             * than flying completely across the page.
+             */
+
+            const card = document.querySelector('.card');
+            const maxX = (card.clientWidth / 2) - 50;
+            const minY = -(card.clientHeight - 180);
+            const maxY = 20;
+
+            const randomX = (Math.random() * 2 - 1) * maxX;
+            const randomY = Math.random() * (maxY - minY) + minY;
+
+            noBtn.style.transform =
+                `translate(
+                    ${randomX}px,
+                    ${randomY}px
+                )`;
+
+
+            /*
+             * Show message
+             */
+
+            message.textContent =
+                messages[messageIndex];
+
+
+            message.classList.add("show");
+
+
+            messageIndex++;
+
+
+            if (
+                messageIndex >=
+                messages.length
+            ) {
+                messageIndex = 0;
+            }
+
+
+            /*
+             * Hide message
+             */
+
+            clearTimeout(
+                window.messageTimer
+            );
+
+
+            window.messageTimer =
+                setTimeout(() => {
+
+                    message.classList.remove(
+                        "show"
+                    );
+
+                }, 1800);
+
+        }
+
+
+        /* =========================================
+           DESKTOP
+           ========================================= */
+
+        noBtn.addEventListener(
+            "mouseenter",
+            moveNoButton
+        );
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        noBtn.addEventListener(
+            "touchstart",
+            function (event) {
+
+                event.preventDefault();
+
+                moveNoButton();
+
+            },
+            {
+                passive: false
+            }
+        );
+
+
+        /* =========================================
+           IF SOMEHOW CLICKED
+           ========================================= */
+
+        noBtn.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                moveNoButton();
+
+            }
+        );
+
+
+        /* =========================================
+           YES BUTTON
+           ========================================= */
+
+        yesBtn.addEventListener(
+            "click",
+            function () {
+
+
+                yesBtn.innerHTML =
+                    "Opening your surprise... 💕";
+
+
+                yesBtn.style.transform =
+                    "scale(1.05)";
+
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            surpriseWebsite;
+
+                    },
+                    700
+                );
+
+            }
+        );
+
+
+        /* =========================================
+           FLOATING HEARTS & SPARKLES
+           ========================================= */
+
+        const decorations =
+            document.getElementById(
+                "decorations"
+            );
+
+
+        const symbols = [
+
+            "♥",
+            "♡",
+            "✦",
+            "✧",
+            "💗",
+            "💖",
+            "✨",
+            "🌸"
+
+        ];
+
+
+        function createDecoration() {
+
+
+            const element =
+                document.createElement("div");
+
+
+            element.className =
+                "decoration";
+
+
+            element.textContent =
+                symbols[
+                Math.floor(
+                    Math.random()
+                    * symbols.length
+                )
+                ];
+
+
+            element.style.left =
+                Math.random() * 100 + "vw";
+
+
+            element.style.fontSize =
+                (
+                    12 +
+                    Math.random() * 20
+                ) + "px";
+
+
+            element.style.animationDuration =
+                (
+                    6 +
+                    Math.random() * 7
+                ) + "s";
+
+
+            element.style.animationDelay =
+                (
+                    Math.random() * 2
+                ) + "s";
+
+
+            decorations.appendChild(
+                element
+            );
+
+
+            setTimeout(
+                () => {
+
+                    element.remove();
+
+                },
+                15000
+            );
+
+        }
+
+
+        setInterval(
+            createDecoration,
+            450
+        );
+
+
+    </script>
+
+</body>
+
+</html>
